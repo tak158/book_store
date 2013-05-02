@@ -19,7 +19,8 @@
           <ul class="pull-right nav">
             <li><a><strong><%= customer_signed_in? ? current_customer.name + " 様" : "" %></a></strong></li>
             <% if customer_signed_in? %>
-            <li><%= link_to "カート表示", "#modal_top", "data-toggle" => "modal", remote: true, class: "show_cart" %></li>
+            <li><%= link_to "カート表示", carts_path, remote: true, class: "show_cart" %></li>
+            <li><%= link_to "カート表示モーダル", "#modal_top", "data-toggle" => "modal", remote: true, class: "show_cart" %></li>
             <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
             <% else %>
             <li><%= link_to "ログイン", new_customer_session_path %></li>
@@ -50,27 +51,32 @@
         </div>
       </div> <!--! end of .container -->
     </div> <!--! end of #main -->
+    <div id="show_area"></div>
 
     <div class="modal hide fade" id="modal_top">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>ショッピングカート</h3>
+        <h3>Modal header</h3>
       </div>
-      <div class="modal-body" id="show_area">
+      <div class="modal-body" id="show_area…">
         <p>One fine body…</p>
       </div>
       <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary">Save changes</button>
+        <a href="#" class="btn">Close</a>
+        <a href="#" class="btn btn-primary">Save changes</a>
       </div>
     </div>
 
     <%= javascript_tag do %>
     $('#modal_top').on('show', function () {
-    $.get("<%= carts_path %>", function(e){
-    $('#show_area').html(e);
+    $.get("./carts.html", function(e){
+    $('#modal_top').html(e);
     });
     })
+
+    $('a.show_cart').on('ajax:success', function(data, status, xhr){
+    $('#modal_top').html(status);
+    })      
     <% end  %>
 
   </body>

@@ -18,7 +18,7 @@
       <td><%= yen cart.book.price %></td>
       <td><%= cart.quantity %></td>
       <td>
-        <%= link_to "数変更", cart, remote: true, class: 'btn btn-mini edit_cart' %>
+        <%= link_to "数量変更", edit_cart_path(cart), class: 'btn btn-mini' %>
         <%= link_to "削除", cart, method: :delete, data: { confirm: '削除して良いですか？' }, class: 'btn btn-mini' %>
       </td>
     </tr>
@@ -36,26 +36,3 @@
     <%= link_to '戻る', root_path, class: 'btn btn-large' %>
   </div>
 </div>
-
-<div class="modal hide fade" id="count_top">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>数量変更</h3>
-  </div>
-  <div class="modal-body" id="count_show_area">
-    <p>数量 body</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
-  </div>
-</div>
-
-<%= javascript_tag do %>
-$('#count_top').on('show', function () {
-console.log(2);
-$.get("<%= edit_cart_path(3) %>", function(e){
-$('#count_show_area').html(e);
-});
-})
-<% end %>
