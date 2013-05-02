@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 class Admin::BooksController < ApplicationController
   layout 'admin'
 
@@ -52,11 +51,6 @@ class Admin::BooksController < ApplicationController
   def destroy
     @book.destroy
     redirect_to admin_books_url, notice: '削除しました'
-  end
-
-  def reorder
-    @data = params[:sort_data]
-    breakpoint
   end
 
   private

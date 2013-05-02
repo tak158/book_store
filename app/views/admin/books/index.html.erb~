@@ -33,23 +33,9 @@
 <br />
 <%= link_to '新規作成', new_admin_book_path, class: 'btn' %>
 
-<div id="sample"></div>
-
 <%= javascript_tag do -%>
 
 $("#sortable").sortable();
-$( "#sortable" ).on( "sortupdate", function( event, ui ) {
-   var sort_data = $( "#sortable" ).sortable( "serialize", { key: "sort" } );
-   console.log(sort_data);
-   $.ajax({
-     type: "POST",
-     url: "<%= reorder_admin_books_path  %>",
-     data: sort_data,
-     success: function(html){
-       console.log("success!")
-     }
-   });
-} );
 
 $("#category_selector").change(function() {
 location.href = "<%= admin_category_books_path(9999) %>".replace('9999', $(this).val());
