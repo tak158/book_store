@@ -12,21 +12,12 @@
   </thead>
   <tbody>
     <% @carts.each do |cart| %>
-    <tr>
-      <td><%= image_tag cart.book.icon_path %></td>
-      <td><%= cart.book.title %></td>
-      <td><%= yen cart.book.price %></td>
-      <td><%= cart.quantity %></td>
-      <td>
-        <%= link_to "数量変更", edit_cart_path(cart), class: 'btn btn-mini' %>
-        <%= link_to "削除", cart, method: :delete, data: { confirm: '削除して良いですか？' }, class: 'btn btn-mini' %>
-      </td>
-    </tr>
+    <%= render "show_body" %>
     <% end %>
-    <tr>
-      <th colspan="4">合計</th>
-      <td colspan="1"><%= yen @total%></td>
-    </tr>  
+      <tr>
+        <th colspan="4">合計</th>
+        <td colspan="1"><%= yen @total%></td>
+      </tr>  
   </tbody>
 </table>
 

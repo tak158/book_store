@@ -19,7 +19,7 @@
           <ul class="pull-right nav">
             <li><a><strong><%= customer_signed_in? ? current_customer.name + " 様" : "" %></a></strong></li>
             <% if customer_signed_in? %>
-            <li><%= link_to "カート表示", carts_path, remote: true, class: "show_cart" %></li>
+            <li><%= link_to "カート表示", carts_path %></li>
             <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
             <% else %>
             <li><%= link_to "ログイン", new_customer_session_path %></li>
@@ -31,15 +31,15 @@
     <div id="main" role="main">
       <div class="container">
         <div class="content">
-          <div class="row">
+           <div class="row">
             <div class="span12">
               <% flash.each do |name, msg| %>
-              <% if msg.is_a?(String) %>
-              <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-                <a class="close" data-dismiss="alert">&#215;</a>
-                <%= content_tag :div, msg, id: "flash_#{name}" %>
-              </div>
-              <% end %>
+                <% if msg.is_a?(String) %>
+                  <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+                    <a class="close" data-dismiss="alert">&#215;</a>
+                    <%= content_tag :div, msg, id: "flash_#{name}" %>
+                  </div>
+                <% end %>
               <% end %>
 
               <%= yield %>
@@ -50,12 +50,5 @@
         </div>
       </div> <!--! end of .container -->
     </div> <!--! end of #main -->
-    <div id="show_area"></div>
-    <%= javascript_tag do %>
-    $('a.show_cart').on('ajax:success', function(data, status, xhr){
-    $('#show_area').html(status);
-    })
-    <% end  %>
-
   </body>
 </html>
