@@ -6,10 +6,6 @@ class CartsController < ApplicationController
   def index
     @carts = Cart.list(current_customer.id)
     @total = Cart.total(current_customer.id)
-
-    if request.xml_http_request?
-      render partial: "show_body"
-    end
   end
 
   def edit
